@@ -20,8 +20,13 @@ namespace Bing
 
 		static void Main(string[] args)
 		{
-			DateLastRun = DateTime.Now.Date;
-			Console.WriteLine("Welcome in Bing Daily Wallpaper app.\n-If u want change your wallpaper now write 1\n-If u want to zet your wallpaper automatically at midnight set write 2");
+			Menu();
+		}
+
+		private static void Menu()
+		{
+			Console.WriteLine(
+				"Welcome in Bing Daily Wallpaper app.\n-If u want change your wallpaper now write 1\n-If u want to zet your wallpaper automatically at midnight set write 2");
 			int n = int.Parse(Console.ReadLine());
 			switch (n)
 			{
@@ -40,16 +45,19 @@ namespace Bing
 						int milliseconds = 1000 * 60 * 60; //verification every hour
 						Thread.Sleep(milliseconds);
 					}
+
 					goto case 2;
 				default:
 					Console.WriteLine("Invalid selection. Try again.");
 					break;
 			}
+
 			Console.ReadLine();
 		}
 
 		private static void Wallpaper()
 		{
+			DateLastRun = DateTime.Now.Date;
 			Console.WriteLine($"Creating directory if not exist.");
 			if (!Directory.Exists(directory))
 			{
