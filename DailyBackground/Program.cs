@@ -4,11 +4,12 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace Bing
+namespace DailyBackground
 {
 	class Program
 	{
-		private static readonly string directory = @"C:\Bing\";
+		
+
 		[DllImport("user32.dll")]
 		private static extern long SystemParametersInfo(int uActiong, int uParam, string lpvParam, int fuWinIni);
 		const int SPIF_UPDATEINIFILE = 1;
@@ -59,6 +60,7 @@ namespace Bing
 		{
 			DateLastRun = DateTime.Now.Date;
 			Console.WriteLine($"Creating directory if not exist.");
+			string directory = @"C:\Bing\";
 			if (!Directory.Exists(directory))
 			{
 				Directory.CreateDirectory(directory);
@@ -68,7 +70,7 @@ namespace Bing
 			FinxXmlFile(ref reply);
 			FindUrlInXml(ref reply);
 			Console.WriteLine($"Downloading today Bing wallpaper file: {backgroundName}");
-			new WebClient().DownloadFile("http://www.bing.com" + reply + "_1920x1200.jpg", backgroundName);
+			new WebClient().DownloadFile("http://www.bing.com" + reply + "_1920x1080.jpg", backgroundName);
 			Console.WriteLine($"Setting Bing photo as wallpaper\nDone!");
 			SystemParametersInfo(SPI_SETDESKWALLPAPER, 1, backgroundName, SPIF_UPDATEINIFILE);
 			DateLastRun = DateTime.Now.Date;
